@@ -1,0 +1,327 @@
+.order-page {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #f8f8ff;
+}
+
+.order-page .order-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.order-page .order-left {
+    width: 860px;
+    height: auto;
+}
+
+.order-page .order-right {
+    width: 360px;
+    height: auto;
+    margin-top: 86px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .order-page .order-right .order-info-box {
+    width: 360px;
+    height: auto;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 16px;
+    justify-content: center;
+    text-align: center;
+
+    box-shadow: inset 0px 4px 16px 0px rgba(242, 189, 87, 0.04),inset 0px 1px 11px 12px rgb(211, 211, 231),14px 14px 5px 0px rgb(187, 187, 191);
+    background: rgb(248, 248, 254);
+  }
+
+  .order-page .order-info-box .order-user-img {
+    margin-left: 33%;
+    width: 117px;
+    height: 112px;
+    justify-content: center;
+    align-items: center;
+  }
+
+   .order-page .order-info-box .order-user-img > img {
+    width: 117px;
+    height: 112px;
+    border-radius: 15px;
+   }
+  
+  .order-page .order-info-box .order-user-name {
+    margin-top: 0;
+    color: rgb(8, 9, 13);
+    font-family: Commissioner;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+  
+  .order-page .order-info-box .order-user-prof {
+    color: rgb(161, 161, 161);
+    font-family: Commissioner;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+
+  .order-page .order-info-box .liner {
+    position: relative;
+    width: 332.59px;
+    height: 0;
+    border: 2px solid rgb(161, 161, 161);
+  }
+  
+  .order-page .order-info-box .city {
+    margin-left: 5px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+  }
+   
+  .order-page .order-info-box .order-user-img  {
+    display: block;
+    flex-direction: row-reverse;
+  }
+
+  .order-page .order-info-box .order-user-img .order-user-icon-box {
+    width: 30px;
+    height: 30px; 
+    border-radius: 37px;
+    background: rgba(0, 0, 0, 0.33);
+  }
+  
+  .order-page .order-info-box .card-input {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid rgb(180, 170, 170);
+    border-radius: 5px;
+
+    background: rgb(245, 245, 245);
+    color: rgb(119, 119, 119);
+    font-family: Commissioner;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0%;
+    text-align: left;
+  }
+  
+  .order-page .order-info-box .card-detail {
+    margin-top: 10px;
+    padding: 10px;
+    width: 47%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid rgb(180, 170, 170);
+    border-radius: 5px;
+
+    background: rgb(245, 245, 245);
+    display: inline-flex;
+    flex-direction: row;
+    color: rgb(119, 119, 119);
+    font-family: Commissioner;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+
+  .order-page .order-info-box .order-payment-method {
+    position: relative;
+    width: 243px;
+    height: 25.68px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+.order-page .order-left .order-nav-frame {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid #f8f8ff;
+}
+
+.order-page .order-left .order-nav-frame .table-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-page .css-lgsv261 {
+    width: 75%;
+}
+
+.order-page .css-heg063-Muitabs-flexContainer {
+    justify-content: space-between;
+}
+ 
+.order-page .order-main-content {
+    justify-content: space-between;
+}
+
+.order-page .css-19kzrtu {
+    padding-top: 24px;
+}
+
+.order-page .order-main-box {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 285px;
+    margin-bottom: 25px;
+    background: #f8f8ff;
+    box-shadow: -13px 16px 4px rgba(0, 0, 0, 0.25), inset 0px -3px 20px 11px #18177033;
+    border-radius: 16px;
+}
+
+.order-page .order-main-box .order-box-scroll {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 105px;
+    max-height: 205px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    overflow-y: scroll;
+}
+
+.order-page  .order-main-box .order-box-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+
+.order-page  .order-main-box .order-box-scroll::-webkit-scrollbar-thumb {
+    background-color: #8989db;
+    border-radius: 5px;
+}
+
+.order-page .order-main-box  .order-name-price {
+    position: relative;
+    height: 47px;
+    margin-top: 5px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.order-page .order-main-box  .order-name-price .order-dish-img {
+    position: relative;
+    width: 50px;
+    height: 47px;
+    border-radius: 29px;
+    background-size: cover;
+}
+
+.order-page .order-box-scroll .order-name-price .title-dish {
+    position: relative;
+    width: 260px;
+    height: 36px;
+    margin-left: 20px;
+    font-family: 'Commissioner';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.order-page .order-box-scroll .order-name-price .price-box {
+    position: relative;
+    max-width: 170px;
+    height: 100%;
+    margin-left: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-page .order-box-scroll .order-name-price .price-box p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #262626;
+}
+
+.order-page .order-main-content .order-main-box .total-price-box {
+    position: relative;
+    width: 100%;
+    height: 41px;
+    margin: 7px 0 7px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.order-page .order-main-content .order-main-box .total-price-box .cancel-button {
+    border-radius: 10px;
+    max-height: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.order-page .order-main-content .order-main-box .total-price-box .verify-button {
+    background: #56b74d;
+    color: #f8f8ff;
+    border-radius: 10px;
+    max-height: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.order-page .order-main-content .order-main-box .total-price-box .box-total {
+    position: relative;
+    max-width: 535px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-page .total-price-box .box-total p {
+    margin-left: 20px;
+    font-family: 'Commissioner';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.order-page .total-price-box .box-total .data-compl {
+    font-family: 'Commissioner';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 36px;
+    color: #000000;
+}
