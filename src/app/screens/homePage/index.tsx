@@ -64,7 +64,6 @@ export default function HomePage() {
       <PopularDishes />
       <Gallery />
       <ActiveUsers />
-      <Events />
     </div>
   )
 }

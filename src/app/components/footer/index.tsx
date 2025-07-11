@@ -27,10 +27,20 @@ const Footer = () => {
             width={{ xs: "100%", sm: "48%", md: "23%" }}
           >
             <Box>
-              <i className="bi bi-geo-alt icon" />
+              <img
+                src="/icons/geo.svg"
+                alt="Location"
+                style={{
+                  width: "25px",
+                  color: "#fff",
+                  background: "#ffb03b",
+                  padding: "4px",
+                  borderRadius: "6px"
+                }}
+              />
             </Box>
             <Box className="address">
-              <Typography variant="h6" gutterBottom>
+              <Typography className="title" variant="h6" gutterBottom>
                 Address
               </Typography>
               <Typography variant="body2">Downtown</Typography>
@@ -45,17 +55,27 @@ const Footer = () => {
             width={{ xs: "100%", sm: "48%", md: "23%" }}
           >
             <Box>
-              <i className="bi bi-telephone icon" />
+              <img
+                src="/icons/contact.svg"
+                alt="Location"
+                style={{
+                  width: "25px",
+                  color: "#fff",
+                  background: "#ffb03b",
+                  padding: "4px",
+                  borderRadius: "6px"
+                }}
+              />
             </Box>
             <Box>
-              <Typography variant="h6" gutterBottom>
+              <Typography className="title" variant="h6" gutterBottom>
                 Contact
               </Typography>
               <Typography variant="body2">
-                <strong>Phone:</strong> +971 4 554 7777
+                <strong>Phone:</strong> +998 88 439 42 00
               </Typography>
               <Typography variant="body2">
-                <strong>Email:</strong> devexuz@gmail.com
+                <strong>Email:</strong> lazyboijon@gmail.com
               </Typography>
             </Box>
           </Stack>
@@ -67,10 +87,20 @@ const Footer = () => {
             width={{ xs: "100%", sm: "48%", md: "23%" }}
           >
             <Box>
-              <i className="bi bi-clock icon" />
+              <img
+                src="/icons/clock.svg"
+                alt="Location"
+                style={{
+                  width: "25px",
+                  color: "#fff",
+                  background: "#ffb03b",
+                  padding: "4px",
+                  borderRadius: "6px"
+                }}
+              />
             </Box>
             <Box>
-              <Typography variant="h6" gutterBottom>
+              <Typography className="title" variant="h6" gutterBottom>
                 Opening Hours
               </Typography>
               <Typography variant="body2">
@@ -81,7 +111,7 @@ const Footer = () => {
 
           {/* Follow Us */}
           <Box width={{ xs: "100%", sm: "48%", md: "23%" }}>
-            <Typography variant="h6" gutterBottom>
+            <Typography className="title" variant="h6" gutterBottom>
               Follow Us
             </Typography>
             <Box
@@ -121,9 +151,10 @@ const Footer = () => {
             <Box
               component="a"
               href="https://github.com/lazyboismile"
-              target="_blank"
+              target="_blank" 
+              className="author"
               rel="noopener"
-              sx={{ color: "#ffffff", textDecoration: "underline" }}
+              sx={{ color: "#ffb03b", textDecoration: "underline", fontFamily: "Satisfy" }}
             >
               Tony
             </Box>

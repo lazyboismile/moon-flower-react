@@ -19,6 +19,14 @@
   margin-bottom: 15px;
 }
 
+.footer .title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: "Satisfy", sans-serif;
+  color: #ffb03b;
+}
+
 .footer .address p {
   margin-bottom: 0px;
 }
