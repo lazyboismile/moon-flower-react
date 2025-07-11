@@ -1,12 +1,4 @@
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardCover from '@mui/joy/CardCover';
-import CardOverflow from '@mui/joy/CardOverflow';
-import { CssVarsProvider } from '@mui/joy/styles';
-import Typography from '@mui/joy/Typography';
-import { Box, Button, Container, Stack } from '@mui/material';
+import { Avatar, Box, Button, Container, Stack } from '@mui/material';
 import { Dispatch } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -122,77 +114,31 @@ const PopularDishes = (props: PopularDishesProps) => {
           <Stack className="cards-frame">
             {chunkedDishes.length > 0 ? (
               chunkedDishes.map((row, rowIndex) => (
-                <Stack
-                  key={rowIndex}
-                  direction="row"
-                  justifyContent="space-between"
-                  sx={{ width: '100%' }}
-                >
-                  {row.map((product: Product) => {
+                <Stack className="avatar">
+                  {row.map((product: Product, i) => {
                     const imagePath = `${serverApi}/${product.productImages[0]}`;
-                    const sizeVolume =
-                      product.productCollection === ProductCollection.DRINK
-                        ? `${product.productVolume} litre`
-                        : `${product.productSize} size`;
                     return (
-                      <CssVarsProvider key={product._id}>
-                        <Card
-                          variant="outlined"
-                          className="card"
-                          onClick={() => chooseDishHandler(product._id)}
-                        >
-                          <CardCover>
-                            <img src={imagePath} alt={product.productName} />
-                          </CardCover>
-                          <CardCover className="card-cover" />
-                          <CardContent sx={{ justifyContent: 'flex-end' }}>
-                            <Stack flexDirection="row" justifyContent="space-between">
-                              <Typography
-                                level="h2"
-                                fontSize="lg"
-                                textColor="#fff"
-                                mb={1}
-                              >
-                                {product.productName}
-                              </Typography>
-                              <Typography
-                                sx={{
-                                  fontWeight: 'md',
-                                  color: 'neutral.300',
-                                  alignItems: 'center',
-                                  display: 'flex',
-                                }}
-                              >
-                                {product.productViews}
-                                <VisibilityIcon sx={{ fontSize: 25, marginLeft: '5px' }} />
-                              </Typography>
-                            </Stack>
-                          </CardContent>
-                          <CardOverflow
-                            sx={{
-                              display: 'flex',
-                              gap: 1.5,
-                              py: 1.5,
-                              px: 'var(--Card-padding)',
-                              borderTop: '1px solid',
-                              height: '60px',
-                            }}
-                          >
-                            <Typography
-                              startDecorator={<DescriptionOutlinedIcon />}
-                              textColor="neutral.300"
-                            >
-                              {product.productDesc}
-                            </Typography>
-                          </CardOverflow>
-                        </Card>
-                      </CssVarsProvider>
+                      <Box key={i} className="menu-card" onClick={() => chooseDishHandler(product._id)}>
+                        <Avatar
+                          src={imagePath}
+                          sx={{ width: 80, height: 80 }}
+                          className="menu-img"
+                        />
+                        <Box className="menu-content">
+                          <a>{product.productName} <span>{product.productDesc || 'Lorem, deren, trataro, filede, nerada'}</span></a>
+                        </Box>
+                        <Box className="menu-ingredients">
+                          ${product.productPrice}
+                        </Box>
+                      </Box>
                     );
                   })}
                 </Stack>
               ))
             ) : (
-              <Box className="no-data">No {productSearch.productCollection} available</Box>
+              <Box className="no-data">
+                No <span className="no-data-txt">{productSearch.productCollection}</span> available
+              </Box>
             )}
           </Stack>
         </Stack>
