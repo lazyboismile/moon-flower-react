@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
 .products-page {
     position: relative;
     width: 100%;
@@ -5,6 +7,19 @@
     background: #f8f8ff;
 }
 
+.order.active {
+  background-color: #ffb03b;
+  border-radius: 12px 0 12px 0;
+  color: white;
+  font-family: "Satisfy", sans-serif;
+  font-weight: 700;
+  transition: all ease-in 0.3s;
+}
+
+.order {
+  background-color: #2e2e27;
+  color: white;
+}
 /* Products */
 
 .products-page .products {
@@ -29,13 +44,16 @@
 
 .products-page .products .avatar-big-box .title {
   margin-right: 120px;
-  color: rgb(52, 52, 52);
-  font-family: "Roboto Serif";
+  font-family: "Satisfy", cursive;
   font-size: 36px;
   font-weight: 600;
   line-height: 42px;
   letter-spacing: 0%;
 } 
+
+.products-page .products .avatar-big-box .title span {
+  color: #ffb03b;
+}
 
 .products-page .products .avatar-big-box .search {
   width: 366px;
@@ -161,13 +179,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ff9200;
+    background: #ffb03b;
     border-radius: 25px;
-    font-family: "Poppins";
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 21px;
+    text-transform: uppercase;
     color: #f8f8ff;
   }
   
@@ -183,7 +202,7 @@
   }
   
   .products-page .product-wrapper .views .cart-icon-wrapper {
-    background: #a100ff;
+    background: #ffb03b;
     border-radius: 10px;
     width: 64px;
     opacity: 0;
@@ -197,10 +216,19 @@
   .products-page .product-wrapper .views .views-wrapper {
     display: flex;
     align-items: center;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    background: color-mix(in srgb, #444444, transparent 70%);
+    font-size: 15px;
+    font-weight: 500;
     opacity: 0;
     gap: 5px;
     transition: opacity 0.3s ease;
   }
+
+    .products-page .product-wrapper .views .views-wrapper .view-count {
+      color: #ffb03b;
+    }
 
 /* Fix the hover effect by targeting the parent CardOverflow */
 .products-page .products .product-wrapper .card .MuiCardOverflow-root:hover .views .cart-icon-wrapper {
@@ -210,13 +238,6 @@
 .products-page .products .product-wrapper .card .MuiCardOverflow-root:hover .views .views-wrapper {
   opacity: 1;
 }
-  
-  .products-page .product-wrapper .views .view-count {
-    color: #fff;
-    font-family: "Poppins";
-    font-size: 14px;
-    font-weight: 500;
-  }
   
   .products-page .product-wrapper .product-detail {
     width: auto;
@@ -238,32 +259,24 @@
 .products-page .product-wrapper .product-detail .info {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
 .products-page .product-wrapper .product-detail .title {
     border-radius: 20px;
     color: rgb(52, 52, 52);
-    font-family: Poppins;
+    font-family: "Satisfy", sans-serif;
     font-size: 20px;
     font-weight: 600;
-    line-height: 30px;
-    letter-spacing: 0%;
-    text-align: left;
 }
 
 .products-page .product-wrapper .product-detail .price {
-    display: flex;
-    flex-direction: row;
     color: rgb(227, 192, 141);
     font-family: Poppins;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
-    line-height: 36px;
-    letter-spacing: 0%;
-    text-align: left;
 }
 
 /* BRANDS-LOGO */

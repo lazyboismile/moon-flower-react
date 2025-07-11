@@ -113,7 +113,7 @@ const Products = (props: ProductsProps) => {
             <Stack flexDirection={"column"} alignItems={"center"}>
                 
             <Stack className="avatar-big-box">
-                <Box className="title">Burak Restaurant</Box>
+                <Box className="title"><span> Moon & Flower </span> Restaurant</Box>
                 <Box
                     className="search"
                     component="form"
@@ -132,7 +132,8 @@ const Products = (props: ProductsProps) => {
                             searchProductHandler();
                             }
                         }}
-                        />
+                        disableUnderline
+                    />
 
 
                     <Button
@@ -158,99 +159,72 @@ const Products = (props: ProductsProps) => {
 
                 <Stack className={"dishes-filter-section"}>
                     <Button
-                        variant={"contained"}
-                        className={"order"}
-                        color={
-                            productSearch.order === "createdAt" ? "primary" : "secondary"
-                        }
-                        onClick={() => searchOrderHandler("createdAt")}
+                    variant="contained"
+                    className={`order ${productSearch.order === "createdAt" ? "active" : ""}`}
+                    onClick={() => searchOrderHandler("createdAt")}
                     >
-                        New
+                    New
                     </Button>
+
                     <Button
-                        variant={"contained"}
-                        className={"order"}
-                        color={
-                            productSearch.order === "productPrice" ? "primary" : "secondary"
-                        }
-                        onClick={() => searchOrderHandler("productPrice")}
+                    variant="contained"
+                    className={`order ${productSearch.order === "productPrice" ? "active" : ""}`}
+                    onClick={() => searchOrderHandler("productPrice")}
                     >
-                        Price
+                    Price
                     </Button>
+
                     <Button
-                        variant={"contained"}
-                        className={"order"}
-                        color={
-                            productSearch.order === "productView" ? "primary" : "secondary"
-                        }
-                        onClick={() => searchOrderHandler("productView")}
+                    variant="contained"
+                    className={`order ${productSearch.order === "productView" ? "active" : ""}`}
+                    onClick={() => searchOrderHandler("productView")}
                     >
-                        Views
+                    View
                     </Button>
                 </Stack>
                 <Stack className="list-category-section">
                     <Stack direction="row" spacing={2} alignItems="flex-start">
                         <Stack className="product-category" direction="column" spacing={1}>
                         <Button
-                            variant="contained"
-                            color={
-                            productSearch.productCollection === ProductCollection.DISH
-                                ? "primary"
-                                : "secondary"
-                        }
-                            className="order"
-                            onClick={() => searchCollectionHandler(ProductCollection.DISH)}
+                        variant="contained"
+                        className={`order ${productSearch.productCollection === ProductCollection.DISH ? "active" : ""}`}
+                        onClick={() => searchCollectionHandler(ProductCollection.DISH)}
                         >
-                            Dish
+                        Dish
                         </Button>
+
                         <Button
-                            variant="contained"
-                            color={
-                            productSearch.productCollection === ProductCollection.SALAD
-                                ? "primary"
-                                : "secondary"
-                        }
-                            className="order"
-                            onClick={() => searchCollectionHandler(ProductCollection.SALAD)}
+                        variant="contained"
+                        className={`order ${productSearch.productCollection === ProductCollection.SALAD ? "active" : ""}`}
+                        onClick={() => searchCollectionHandler(ProductCollection.SALAD)}
                         >
-                            Salad
+                        Salad
                         </Button>
+
                         <Button
-                            variant="contained"
-                            color={
-                            productSearch.productCollection === ProductCollection.DRINK
-                                ? "primary"
-                                : "secondary"
-                        }
-                            className="order"
-                            onClick={() => searchCollectionHandler(ProductCollection.DRINK)}
+                        variant="contained"
+                        className={`order ${productSearch.productCollection === ProductCollection.DRINK ? "active" : ""}`}
+                        onClick={() => searchCollectionHandler(ProductCollection.DRINK)}
                         >
-                            Drink
+                        Drink
                         </Button>
+
                         <Button
-                            variant="contained"
-                            color={
-                            productSearch.productCollection === ProductCollection.DESSERT
-                                ? "primary"
-                                : "secondary"
-                        }
-                            className="order"
-                            onClick={() => searchCollectionHandler(ProductCollection.DESSERT)}
+                        variant="contained"
+                        className={`order ${productSearch.productCollection === ProductCollection.DESSERT ? "active" : ""}`}
+                        onClick={() => searchCollectionHandler(ProductCollection.DESSERT)}
                         >
-                            Dessert
+                        Dessert
                         </Button>
+
                         <Button
-                            variant="contained"
-                            color={
-                            productSearch.productCollection === ProductCollection.OTHER
-                                ? "primary"
-                                : "secondary"
-                            }
-                            className="order"
-                            onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
+                        variant="contained"
+                        className={`order ${productSearch.productCollection === ProductCollection.OTHER ? "active" : ""}`}
+                        onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
                         >
-                            Other
+                        Other
                         </Button>
+
                         </Stack>
 
                         {/* Product Cards on the Right */}
@@ -349,7 +323,7 @@ const Products = (props: ProductsProps) => {
             </Stack>
         </Container>
 
-        <div className="brands-logo">
+        {/* <div className="brands-logo">
             <Container>
                 <Stack className="main">
                 <Box className="category-title">Our Family Brands</Box>
@@ -374,7 +348,7 @@ const Products = (props: ProductsProps) => {
                 </Stack>
                 </Stack>
             </Container>
-        </div>
+        </div> */}
 
         <div className={"address"}>
             <Container>
@@ -382,7 +356,7 @@ const Products = (props: ProductsProps) => {
                     <Box className={"title"}>Our Address</Box>
                     <iframe 
                         style={{ marginTop: "60px"}}
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202404.914169482!2d126.8093323603306!3d37.565033714079114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca28b61c565cd%3A0x858aedb4e4ea83eb!2z0KHQtdGD0LssINCu0LbQvdCw0Y8g0JrQvtGA0LXRjw!5e0!3m2!1sru!2sus!4v1745344040946!5m2!1sru!2sus"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20690.869144947923!2d-104.67494838560454!3d50.39880348863695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x531ea743b6e64bcf%3A0x535a1407788e7972!2sMoon%20and%20Flower%20Bakery!5e1!3m2!1sen!2s!4v1752263830479!5m2!1sen!2s"
                         width="1320"
                         height="500"
                         referrerPolicy="no-referrer-when-downgrade"

@@ -43,7 +43,7 @@ const Footer = () => {
               <Typography className="title" variant="h6" gutterBottom>
                 Address
               </Typography>
-              <Typography variant="body2">Downtown</Typography>
+              <Typography variant="body2">A108 Adam Stree</Typography>
               <Typography variant="body2">Dubai, UAE</Typography>
             </Box>
           </Stack>
