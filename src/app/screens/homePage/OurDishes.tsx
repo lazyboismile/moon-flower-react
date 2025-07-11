@@ -114,22 +114,27 @@ const OurDishes = (props: PopularDishesProps) => {
           <Stack className="cards-frame">
             {chunkedDishes.length > 0 ? (
               chunkedDishes.map((row, rowIndex) => (
-                <Stack className="avatar">
-                  {row.map((product: Product, i) => {
+                <Stack key={`row-${rowIndex}`} className="avatar">
+                  {row.map((product: Product) => {
                     const imagePath = `${serverApi}/${product.productImages[0]}`;
                     return (
-                      <Box key={i} className="menu-card" onClick={() => chooseDishHandler(product._id)}>
+                      <Box
+                        key={product._id}
+                        className="menu-card"
+                        onClick={() => chooseDishHandler(product._id)}
+                      >
                         <Avatar
                           src={imagePath}
                           sx={{ width: 80, height: 80 }}
                           className="menu-img"
                         />
                         <Box className="menu-content">
-                          <a>{product.productName} <span>{product.productDesc || 'Lorem, deren, trataro, filede, nerada'}</span></a>
+                          <a>
+                            {product.productName}
+                            <span>{product.productDesc || 'Lorem, deren, trataro, filede, nerada'}</span>
+                          </a>
                         </Box>
-                        <Box className="menu-ingredients">
-                          ${product.productPrice}
-                        </Box>
+                        <Box className="menu-ingredients">${product.productPrice}</Box>
                       </Box>
                     );
                   })}
@@ -141,6 +146,7 @@ const OurDishes = (props: PopularDishesProps) => {
               </Box>
             )}
           </Stack>
+
         </Stack>
       </Container>
     </div>

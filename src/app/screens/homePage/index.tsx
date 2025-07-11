@@ -8,7 +8,7 @@ import MemberService from '../../services/MemberService';
 import ProductService from '../../services/ProductService';
 import AboutUs from './AboutUs';
 import ActiveUsers from "./ActiveUsers";
-import Advertisement from "./Advertisement";
+import Gallery from "./Gallery";
 import Events from "./Events";
 import OurDishes from "./OurDishes";
 import PopularDishes from "./PopularDishes";
@@ -62,7 +62,7 @@ export default function HomePage() {
       <AboutUs />
       <OurDishes />
       <PopularDishes />
-      <Advertisement />
+      <Gallery />
       <ActiveUsers />
       <Events />
     </div>

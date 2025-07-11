@@ -5,29 +5,23 @@ import ShareIcon from '@mui/icons-material/Share';
 import {
   Box,
   Card,
-
-
-
   CardActions, CardContent, CardHeader,
   CardMedia,
-
-
   Collapse,
-
-
   Container, IconButton,
-
   Stack,
-
-  styled, Typography
+  styled,
+  Typography
 } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createSelector } from 'reselect';
 import { serverApi } from '../../../lib/config';
 import { ProductCollection } from '../../../lib/enums/product.enum';
 import { Product } from '../../../lib/types/product';
 import { retrieveNewDishes } from './selector';
+
 
 // Redux selector
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
@@ -46,13 +40,19 @@ const ExpandMore = styled((props: any) => {
   }),
 }));
 
-const NewDishes = () => {
+const PopularDishes = () => {
   const { newDishes } = useSelector(newDishesRetriever);
 const [expandedCardId, setExpandedCardId] = React.useState<string | null>(null);
 
 const handleExpandClick = (id: string) => {
   setExpandedCardId(prev => (prev === id ? null : id));
 };;
+
+  const history = useHistory();
+
+ const chooseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
 
   return (
     <Box className="new-products-frame">
@@ -119,6 +119,7 @@ const handleExpandClick = (id: string) => {
                           <Typography>Price: <span>${product.productPrice}</span></Typography>
                           <Typography>Views: <span>{product.productViews}</span></Typography>
                         </Box>
+                        <Typography onClick={() => chooseDishHandler(product._id)} sx={{ marginTop: 2, fontSize: "15px", fontFamily: "Poppins", color: "#33a8ff" }}>More Information</Typography>
                       </CardContent>
                     </Collapse>
                   </Card>
@@ -134,4 +135,4 @@ const handleExpandClick = (id: string) => {
   );
 };
 
-export default NewDishes;
+export default PopularDishes;
