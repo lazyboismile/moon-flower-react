@@ -103,7 +103,6 @@ const ProcessOrders = (props: ProceessOrdersProps) => {
                 </Box>
                 <Button 
                   value={order._id}
-                  variant="contained" 
                   className={"verify-button"}
                   onClick={finishOrderHandler}
                 >

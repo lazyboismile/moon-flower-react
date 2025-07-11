@@ -26,40 +26,75 @@
     flex-direction: column;
   }
   
-  .order-page .order-right .order-info-box {
-    width: 360px;
-    height: auto;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 16px;
-    justify-content: center;
-    text-align: center;
+ .order-page .order-right .order-info-box {
+  position: relative;
+  width: 360px;
+  height: auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+  z-index: 1;
+  overflow: hidden;
+}
 
-    box-shadow: inset 0px 4px 16px 0px rgba(242, 189, 87, 0.04),inset 0px 1px 11px 12px rgb(211, 211, 231),14px 14px 5px 0px rgb(187, 187, 191);
-    background: rgb(248, 248, 254);
+.order-page .order-right .order-info-box::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #fdfdfd,
+    #ffffff
+  );
+  background-size: 400% 400%;
+  animation: gradient-border 6s linear infinite;
+  border-radius: 18px;
+}
+
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-  .order-page .order-info-box .order-user-img {
-    margin-left: 33%;
-    width: 117px;
-    height: 112px;
+.order-page .order-info-box .member-box {
+    width: 600px;
+    height: auto;
     justify-content: center;
     align-items: center;
-  }
-
+}
    .order-page .order-info-box .order-user-img > img {
-    width: 117px;
-    height: 112px;
+    width: 100%;
     border-radius: 15px;
    }
+
+     .order-page .order-info-box .info {
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 10px 10px 10px 10px;
+     }
   
   .order-page .order-info-box .order-user-name {
-    margin-top: 0;
-    color: rgb(8, 9, 13);
-    font-family: Commissioner;
+    margin-top: 10px;
+    color: #ffb03b;
+    font-family: "Satisfy";
     font-size: 28px;
     font-weight: 500;
     line-height: 36px;
@@ -69,29 +104,22 @@
   
   .order-page .order-info-box .order-user-prof {
     color: rgb(161, 161, 161);
-    font-family: Commissioner;
+    margin-top: 10px;
+    font-family: Roboto;
     font-size: 20px;
     font-weight: 500;
     line-height: 36px;
     letter-spacing: 0%;
     text-align: center;
   }
-
-  .order-page .order-info-box .liner {
-    position: relative;
-    width: 332.59px;
-    height: 0;
-    border: 2px solid rgb(161, 161, 161);
-  }
   
   .order-page .order-info-box .city {
-    margin-left: 5px;
-    font-family: 'DM Sans';
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #000;
+    color: #444444;
   }
    
   .order-page .order-info-box .order-user-img  {
@@ -191,8 +219,10 @@
     height: auto;
     max-height: 285px;
     margin-bottom: 25px;
-    background: #f8f8ff;
-    box-shadow: -13px 16px 4px rgba(0, 0, 0, 0.25), inset 0px -3px 20px 11px #18177033;
+    background: linear-gradient(145deg, #fdfcff, #e8e9f3);
+    box-shadow:
+    -12px 12px 20px rgba(0, 0, 0, 0.12), 
+    inset 0px -3px 18px 10px rgba(107, 107, 181, 0.12);  
     border-radius: 16px;
 }
 
@@ -290,11 +320,14 @@
 }
 
 .order-page .order-main-content .order-main-box .total-price-box .verify-button {
-    background: #56b74d;
-    color: #f8f8ff;
-    border-radius: 10px;
-    max-height: 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  background: linear-gradient(135deg, #f6c343, #d99904); 
+  border: 1px solid #f6c343;
+  box-shadow: 0 4px 14px rgba(246, 195, 67, 0.4);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .order-page .order-main-content .order-main-box .total-price-box .box-total {

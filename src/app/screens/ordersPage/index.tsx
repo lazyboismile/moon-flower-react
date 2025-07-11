@@ -110,12 +110,13 @@ const OrdersPage = () => {
                   />
                 </div> */}
               </div>
-              <Box className={"order-user-name"}>{authMember?.memberNick}</Box>
-              <Box className={"order-user-prof"}>{authMember?.memberType}</Box> 
+              <Stack className={"info"}>
+                <Box className={"order-user-name"}>{authMember?.memberNick}</Box>
+                <Box className={"order-user-prof"}>{authMember?.memberType}</Box> 
+              </Stack>
 
-              <Box className="liner" />
             <Box className={"order-user-location"}>
-              <LocationOnIcon />
+              <LocationOnIcon sx={{color: "#ffb03b"}}/>
               <span className={"city"}>
                 {authMember?.memberAddress
                   ? authMember.memberAddress
@@ -125,36 +126,7 @@ const OrdersPage = () => {
             </Box>
             </Box>
           </Box>
-          <Box className={"order-info-box"}>
-            <Box className={"payment-box"}>
-            <div className={"order-payment-text"}>
-              <p className="card-input">Card number: 5243 4090 2002 7495</p>
-              <div className="order-payment-text-2">
-                <Box className="card-detail" marginRight={"10px"}>07 / 24</Box>
-                <Box className="card-detail">CVV: 010</Box>
-              </div>
-              <p className="card-input">Justin Robertson</p>
-            </div>
-              <Box className={"order-payment-method"}>
-              <img 
-                src="/icons/western-card.svg"
-                className="order-user-payment-img" 
-              />
-              <img 
-                src="/icons/master-card.svg"
-                className="order-user-payment-img" 
-              />
-              <img 
-                src="/icons/paypal-card.svg"
-                className="order-user-payment-img" 
-              />
-              <img 
-                src="/icons/visa-card.svg"
-                className="order-user-payment-img" 
-              />
-            </Box>
-            </Box>
-          </Box>
+          
         </Stack>
       </Container>
     </div>
