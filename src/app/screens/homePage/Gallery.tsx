@@ -5,7 +5,7 @@ import "glightbox/dist/css/glightbox.min.css";
 import React, { useEffect } from 'react';
 
 
-const Advertisement = () => {
+const Gallery = () => {
 
   useEffect(() => {
     const lightbox = GLightbox({
@@ -53,4 +53,4 @@ const Advertisement = () => {
   );
 }
 
-export default Advertisement
+export default Gallery

@@ -26,32 +26,45 @@ const ActiveUsers = () => {
     <div className={"active-users-frame"}>
         <Container>
         <Stack className="main">
-            <Box className="category-title">Active Users</Box>
+          <Stack className="container">
+            <Box className="category-button">Chefs</Box>
+            <Box className="category-title">
+              Our Active <span> User</span>
+            </Box>
+          </Stack>
             <Stack className="cards-frame">
 
               <CssVarsProvider>
                 {topUsers.length !== 0 ? (
-                  topUsers.map((member: Member) => {
-                    const imagePath = `${serverApi}/${member.memberImage}`
-                    return (
-                      <Card key={member._id} variant="outlined" className={"card"}>
+                  [...topUsers]
+                    .sort((a, b) => b.memberPoints - a.memberPoints) // Sort descending
+                    .slice(0, 3) // Take top 3
+                    .map((member: Member) => {
+                      const imagePath = `${serverApi}/${member.memberImage}`;
+                      return (
+                        <Card key={member._id}>
                           <CardOverflow>
-                            <AspectRatio ratio="1">
-                              <img src={imagePath} alt="" />
+                            <AspectRatio ratio="1" className="pic">
+                              <img src={imagePath} alt={member.memberNick} />
                             </AspectRatio>
                           </CardOverflow>
-  
-                          <CardOverflow variant="soft" className={"member-nickname"}>
-                                <Typography className={"title"}>
-                                  {member.memberNick}
-                                </Typography>
+
+                          <CardOverflow variant="soft" className={"member-info"}>
+                            <Typography className={"title"}>{member.memberNick}</Typography>
+                            <Typography className={"point"}>Member Orders: {member.memberPoints}</Typography>
+                            <Box className="social">
+                              <img src="/icons/facebook.svg" alt="Facebook" />
+                              <img src="/icons/twitter.svg" alt="Twitter" />
+                              <img src="/icons/instagram.svg" alt="Instagram" />
+                              <img src="/icons/youtube.svg" alt="YouTube" />
+                            </Box>
                           </CardOverflow>
                         </Card>
-                    );
-                  })
+                      );
+                    })
                 ) : (
                   <Box className="no-data">No Active Users!</Box>
-                )} 
+                )}
               </CssVarsProvider>
             </Stack>
         </Stack>
