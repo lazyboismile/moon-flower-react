@@ -1,150 +1,137 @@
-import { Avatar, Box, Button, Container, Stack } from '@mui/material';
-import { Dispatch } from '@reduxjs/toolkit';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ShareIcon from '@mui/icons-material/Share';
+import {
+  Box,
+  Card,
+
+
+
+  CardActions, CardContent, CardHeader,
+  CardMedia,
+
+
+  Collapse,
+
+
+  Container, IconButton,
+
+  Stack,
+
+  styled, Typography
+} from '@mui/material';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { serverApi } from '../../../lib/config';
 import { ProductCollection } from '../../../lib/enums/product.enum';
-import { Product, ProductInquiry } from '../../../lib/types/product';
-import { CartItem } from '../../../lib/types/search';
-import ProductService from '../../services/ProductService';
-import { retrievePopularDishes } from './selector';
-import { setPopularDishes } from './slice';
+import { Product } from '../../../lib/types/product';
+import { retrieveNewDishes } from './selector';
 
-// ** REDUX SLICE & SELECTOR **
-const actionDispatch = (dispatch: Dispatch) => ({
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
-});
-const popularDishesRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({ popularDishes })
-);
+// Redux selector
+const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
+  newDishes,
+}));
 
-interface PopularDishesProps {
-  onAdd?: (item: CartItem) => void; // Made optional
-}
+// Styled ExpandMore button
+const ExpandMore = styled((props: any) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }: { theme?: any; expand: boolean }) => ({
+  marginLeft: 'auto',
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
-const PopularDishes = (props: PopularDishesProps) => {
-  const { onAdd = () => {} } = props;
-  const dispatch = useDispatch();
-  const { popularDishes } = useSelector(popularDishesRetriever);
-  const history = useHistory();
+const NewDishes = () => {
+  const { newDishes } = useSelector(newDishesRetriever);
+const [expandedCardId, setExpandedCardId] = React.useState<string | null>(null);
 
-  const [productSearch, setProductSearch] = useState<ProductInquiry>({
-    page: 1,
-    limit: 8,
-    order: 'createdAt',
-    productCollection: ProductCollection.DISH,
-    search: '',
-  });
-
-  useEffect(() => {
-    const product = new ProductService();
-    product
-      .getProducts(productSearch)
-      .then((data) => dispatch(setPopularDishes(data)))
-      .catch((err) => console.log('Error fetching popular dishes:', err));
-  }, [productSearch, dispatch]);
-
-  const searchCollectionHandler = (collection: ProductCollection) => {
-    productSearch.page = 1;
-    productSearch.productCollection = collection;
-    setProductSearch({ ...productSearch });
-  };
-
-  const chooseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
-  };
-
-  // Function to chunk array into groups of 4
-  const chunkArray = (array: Product[], size: number) => {
-    const result = [];
-    for (let i = 0; i < array.length; i += size) {
-      result.push(array.slice(i, i + size));
-    }
-    return result;
-  };
-
-  // Chunk popularDishes into groups of 4
-  const chunkedDishes = chunkArray(popularDishes, 4);
+const handleExpandClick = (id: string) => {
+  setExpandedCardId(prev => (prev === id ? null : id));
+};;
 
   return (
-    <div className="popular-dishes-frame">
+    <Box className="new-products-frame">
       <Container>
-        <Stack className="popular-section">
-          <Box className="category-button">Our Menu</Box>
+        <Stack className="main">
+          <Box className="category-button">Our Top</Box>
           <Box className="category-title">
-            Check Our Tasty <span>Menu</span>
+            Check Our <span>Tasty Meals</span>
           </Box>
 
-          <Stack className="product-category">
-            <Button
-              className="order"
-              onClick={() => searchCollectionHandler(ProductCollection.DISH)}
-            >
-              Dish
-            </Button>
-            <Button
-              className="order"
-              onClick={() => searchCollectionHandler(ProductCollection.SALAD)}
-            >
-              Salad
-            </Button>
-            <Button
-              className="order"
-              onClick={() => searchCollectionHandler(ProductCollection.DRINK)}
-            >
-              Drink
-            </Button>
-            <Button
-              className="order"
-              onClick={() => searchCollectionHandler(ProductCollection.DESSERT)}
-            >
-              Dessert
-            </Button>
-            <Button
-              className="order"
-              onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
-            >
-              Other
-            </Button>
-          </Stack>
+          <Stack className="cards-frame" direction="row" flexWrap="wrap" gap={3}>
+            {newDishes.length !== 0 ? (
+              newDishes.map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
+                const sizeVolume =
+                  product.productCollection === ProductCollection.DRINK
+                    ? product.productVolume + 'l'
+                    : product.productSize + ' size';
 
-          <Stack className="cards-frame">
-            {chunkedDishes.length > 0 ? (
-              chunkedDishes.map((row, rowIndex) => (
-                <Stack className="avatar">
-                  {row.map((product: Product, i) => {
-                    const imagePath = `${serverApi}/${product.productImages[0]}`;
-                    return (
-                      <Box key={i} className="menu-card" onClick={() => chooseDishHandler(product._id)}>
-                        <Avatar
-                          src={imagePath}
-                          sx={{ width: 80, height: 80 }}
-                          className="menu-img"
-                        />
-                        <Box className="menu-content">
-                          <a>{product.productName} <span>{product.productDesc || 'Lorem, deren, trataro, filede, nerada'}</span></a>
+                return (
+                  <Card key={product._id} sx={{ maxWidth: 345, flex: '1 1 300px' }}>
+                    <CardHeader
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                      title={product.productName}
+                      subheader={sizeVolume}
+                    />
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image={imagePath}
+                      alt={product.productName}
+                    />
+                    <CardContent>
+                      <Typography variant="body2" color="text.secondary">
+                        {product.productDesc || 'This is a delicious product you must try.'}
+                      </Typography>
+                    </CardContent>
+
+                    <CardActions disableSpacing>
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon sx={{color: "red"}}/>
+                      </IconButton>
+                      <IconButton aria-label="share">
+                        <ShareIcon />
+                      </IconButton>
+                      <ExpandMore
+                        expand={expandedCardId === product._id}
+                        onClick={() => handleExpandClick(product._id)}
+                        aria-expanded={expandedCardId === product._id}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </ExpandMore>
+                    </CardActions>
+
+                    <Collapse in={expandedCardId === product._id} timeout="auto" unmountOnExit className="details"> 
+                      <CardContent>
+                        <Typography sx={{ marginBottom: 2, fontSize: "20px", fontFamily: "Poppins" }}>Details:</Typography>
+                        <Box className="detail">
+                          <Typography>Price: <span>${product.productPrice}</span></Typography>
+                          <Typography>Views: <span>{product.productViews}</span></Typography>
                         </Box>
-                        <Box className="menu-ingredients">
-                          ${product.productPrice}
-                        </Box>
-                      </Box>
-                    );
-                  })}
-                </Stack>
-              ))
+                      </CardContent>
+                    </Collapse>
+                  </Card>
+                );
+              })
             ) : (
-              <Box className="no-data">
-                No <span className="no-data-txt">{productSearch.productCollection}</span> available
-              </Box>
+              <Box className="no-data">New Products are not available!</Box>
             )}
           </Stack>
         </Stack>
       </Container>
-    </div>
+    </Box>
   );
 };
 
-export default PopularDishes;
+export default NewDishes;

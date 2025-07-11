@@ -304,9 +304,10 @@
 
 .homepage .new-products-frame {
     width: 100%;
-    height: 605px;
+    height: auto;
     background: #f8f8ff;
     display: flex;
+    margin-bottom: 30px;
 }
 
 .homepage .main {
@@ -316,12 +317,30 @@
     align-items: center;
 }
 
-.homepage .new-products-frame .category-title {
-    font-family: "Dancing Script";
-    font-style: normal;
+.homepage .new-products-frame .category-button {
+    font-size: 13px;
+    letter-spacing: 1px;
     font-weight: 700;
-    font-size: 36px;
-    line-height: 43px;
+    padding: 8px 20px;
+    margin: 0;
+    background-color: color-mix(in srgb, #ffb03b,  transparent 90%);
+    color: #ffb03b;
+    display: inline-block;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-family: Roboto;
+}
+
+.homepage .new-products-frame .category-title {
+    color: #433f39;
+    margin: 10px 0 0 0;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: "Satisfy", sans-serif;
+}
+
+.homepage .new-products-frame .category-title span {
+  color: #ffb03b;
 }
 
 .homepage .new-products-frame .main .cards-frame {
@@ -331,10 +350,22 @@
     justify-content: space-between;
 }
 
-.homepage .new-products-frame .main .card {
-    height: 335px;
-    width: 290px;
-    cursor: pointer;
+.homepage .new-products-frame .main .cards-frame .details {
+  text-align: center;
+}
+
+.homepage .new-products-frame .main .cards-frame .details .detail {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: color-mix(in srgb, #444444, transparent 30%);
+}
+
+.homepage .new-products-frame .main .cards-frame .details .detail span {
+  color: #ffb03b;
+  font-size: 20px;
+  font-family: "Satisfy", sans-serif;
+  font-weight: bold;
 }
 
 .homepage .new-products-frame .product-sale {

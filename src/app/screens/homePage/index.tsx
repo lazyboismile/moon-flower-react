@@ -2,7 +2,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import React, { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import "../../../css/home.css";
-import { ProductCollection } from '../../../lib/enums/product.enum';
 import { Member } from '../../../lib/types/member';
 import { Product } from '../../../lib/types/product';
 import MemberService from '../../services/MemberService';
@@ -11,7 +10,7 @@ import AboutUs from './AboutUs';
 import ActiveUsers from "./ActiveUsers";
 import Advertisement from "./Advertisement";
 import Events from "./Events";
-import NewDishes from "./NewDishes";
+import OurDishes from "./OurDishes";
 import PopularDishes from "./PopularDishes";
 import { setNewDishes, setPopularDishes, setTopUsers } from './slice';
 
@@ -31,8 +30,7 @@ export default function HomePage() {
     product.getProducts({
       page: 1,
       limit: 4,
-      order: "productViews",
-      productCollection: ProductCollection.DISH,
+      order: "createdAt",
     })
     .then(data => {
       setPopularDishes(data);
@@ -42,7 +40,7 @@ export default function HomePage() {
     product.getProducts({
       page: 1,
       limit: 4,
-      order: "createdAt",
+      order: "productViews",
     })
     .then(data => {
       setNewDishes(data);
@@ -62,8 +60,8 @@ export default function HomePage() {
   return (
     <div className={"homepage"}>
       <AboutUs />
+      <OurDishes />
       <PopularDishes />
-      <NewDishes />
       <Advertisement />
       <ActiveUsers />
       <Events />
