@@ -1,39 +1,72 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { Fab, Stack, TextField } from "@mui/material";
-import styled from "styled-components";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
 import LoginIcon from "@mui/icons-material/Login";
-import { T } from "../../../lib/types/common";
+import { Fab, Stack, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { Messages } from "../../../lib/config";
-import { LoginInput, MemberInput } from "../../../lib/types/member";
-import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { T } from "../../../lib/types/common";
+import { LoginInput, MemberInput } from "../../../lib/types/member";
 import { useGlobals } from "../../hooks/useGlobals";
+import MemberService from "../../services/MemberService";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   modal: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 2, 2),
+    display: "flex",
+    borderRadius: 16,
+    overflow: "hidden",
+    boxShadow: "0 10px 35px rgba(0, 0, 0, 0.15)",
+    backgroundColor: "#ffffff",
   },
 }));
 
 const ModalImg = styled.img`
-  width: 62%;
-  height: 100%;
-  border-radius: 10px;
-  background: #000;
-  margin-top: 9px;
-  margin-left: 10px;
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+`;
+
+const FormSection = styled(Stack)`
+  padding: 50px 40px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+
+  h5 {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .MuiTextField-root {
+    background: #ffffff;
+    border-radius: 8px;
+  }
+
+  .MuiFab-root {
+    box-shadow: none;
+    background-color: #3498db;
+    color: #fff;
+    text-transform: none;
+    font-weight: bold;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
 `;
 
 interface AuthenticationModalProps {
@@ -51,187 +84,119 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberPassword, setMemberPassword] = useState<string>("");
   const { setAuthMember } = useGlobals();
 
-  /** HANDLERS **/
+  const handleUsername = (e: T) => setMemberNick(e.target.value);
+  const handlePhone = (e: T) => setMemberPhone(e.target.value);
+  const handlePassword = (e: T) => setMemberPassword(e.target.value);
 
-  const handleUsername = (e: T) => {
-    setMemberNick(e.target.value);
-  };
-  const handlePhone = (e: T) => {
-    setMemberPhone(e.target.value);
-  };
-  const handlePassword = (e: T) => {
-    setMemberPassword(e.target.value);
-  };
   const handlePasswordKeyDown = (e: T) => {
-    if(e.key === "Enter" && signupOpen) {
-      handleSignupRequest().then();
-    } else if(e.key === "Enter" && loginOpen) {
-      handleLoginRequest().then();
-    }
+    if (e.key === "Enter" && signupOpen) handleSignupRequest();
+    else if (e.key === "Enter" && loginOpen) handleLoginRequest();
   };
 
   const handleSignupRequest = async () => {
     try {
-      const isFulfill = 
-        memberNick !== "" && memberPhone !== "" && memberPassword !== "";
-      if (!isFulfill) throw new Error(Messages.error3);
+      if (!memberNick || !memberPhone || !memberPassword)
+        throw new Error(Messages.error3);
 
       const signupInput: MemberInput = {
-        memberNick: memberNick,
-        memberPhone: memberPhone,
-        memberPassword: memberPassword,
+        memberNick,
+        memberPhone,
+        memberPassword,
       };
 
       const member = new MemberService();
       const result = await member.signup(signupInput);
-
-      // Saving Authenticated user
       setAuthMember(result);
       handleSignupClose();
     } catch (err) {
-      console.log(err);
       handleSignupClose();
-      sweetErrorHandling(err).then();
+      sweetErrorHandling(err);
     }
   };
 
   const handleLoginRequest = async () => {
     try {
-      const isFulfill = 
-        memberNick !== "" && memberPassword !== "";
-      if (!isFulfill) throw new Error(Messages.error3);
+      if (!memberNick || !memberPassword) throw new Error(Messages.error3);
 
-      const LoginInput: LoginInput = {
-        memberNick: memberNick,
-        memberPassword: memberPassword,
-      };
-
+      const loginInput: LoginInput = { memberNick, memberPassword };
       const member = new MemberService();
-      const result = await member.login(LoginInput);
-
-      // Saving Authenticated user
+      const result = await member.login(loginInput);
       setAuthMember(result);
       handleLoginClose();
     } catch (err) {
-      console.log(err);
       handleLoginClose();
-      sweetErrorHandling(err).then();
+      sweetErrorHandling(err);
     }
   };
 
+  const renderForm = (type: "login" | "signup") => (
+    <FormSection>
+      <Typography variant="h5">{type === "signup" ? "Signup" : "Login"} Form</Typography>
+      <TextField
+        fullWidth
+        label="Username"
+        variant="outlined"
+        onChange={handleUsername}
+      />
+      {type === "signup" && (
+        <TextField
+          fullWidth
+          label="Phone Number"
+          variant="outlined"
+          onChange={handlePhone}
+        />
+      )}
+      <TextField
+        fullWidth
+        label="Password"
+        type="password"
+        variant="outlined"
+        onChange={handlePassword}
+        onKeyDown={handlePasswordKeyDown}
+      />
+      <Fab
+        variant="extended"
+        onClick={type === "signup" ? handleSignupRequest : handleLoginRequest}
+      >
+        <LoginIcon sx={{ mr: 1 }} />
+        {type === "signup" ? "Signup" : "Login"}
+      </Fab>
+    </FormSection>
+  );
+
   return (
-    <div>
+    <>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
         open={signupOpen}
         onClose={handleSignupClose}
+        className={classes.modal}
         closeAfterTransition
         BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        BackdropProps={{ timeout: 500 }}
       >
         <Fade in={signupOpen}>
-          <Stack
-            className={classes.paper}
-            direction={"row"}
-            sx={{ width: "800px" }}
-          >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
-            <Stack sx={{ marginLeft: "69px", alignItems: "center" }}>
-              <h2>Signup Form</h2>
-              <TextField
-                sx={{ marginTop: "7px" }}
-                id="outlined-basic"
-                label="username"
-                variant="outlined"
-                onChange={handleUsername}
-              />
-              <TextField
-                sx={{ my: "17px" }}
-                id="outlined-basic"
-                label="phone number"
-                variant="outlined"
-                onChange={handlePhone}
-              />
-              <TextField
-                id="outlined-basic"
-                label="password"
-                variant="outlined"
-                onChange={handlePassword}
-                onKeyDown={handlePasswordKeyDown}
-              />
-              <Fab
-                sx={{ marginTop: "30px", width: "120px" }}
-                variant="extended"
-                color="primary"
-                onClick={handleSignupRequest}
-              >
-                <LoginIcon sx={{ mr: 1 }} />
-                Signup
-              </Fab>
-            </Stack>
-          </Stack>
+          <div className={classes.paper} style={{ width: "850px" }}>
+            <ModalImg src="/img/gallery-2.jpg" alt="signup" />
+            {renderForm("signup")}
+          </div>
         </Fade>
       </Modal>
 
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
         open={loginOpen}
         onClose={handleLoginClose}
+        className={classes.modal}
         closeAfterTransition
         BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        BackdropProps={{ timeout: 500 }}
       >
         <Fade in={loginOpen}>
-          <Stack
-            className={classes.paper}
-            direction={"row"}
-            sx={{ width: "700px" }}
-          >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
-            <Stack
-              sx={{
-                marginLeft: "65px",
-                marginTop: "25px",
-                alignItems: "center",
-              }}
-            >
-              <h2>Login Form</h2>
-              <TextField
-                id="outlined-basic"
-                label="username"
-                variant="outlined"
-                sx={{ my: "10px" }}
-                onChange={handleUsername}
-              />
-              <TextField
-                id={"outlined-basic"}
-                label={"password"}
-                variant={"outlined"}
-                type={"password"}
-                onChange={handlePassword}
-                onKeyDown={handlePasswordKeyDown}
-              />
-              <Fab
-                sx={{ marginTop: "27px", width: "120px" }}
-                variant={"extended"}
-                color={"primary"}
-                onClick={handleLoginRequest}
-              >
-                <LoginIcon sx={{ mr: 1 }} />
-                Login
-              </Fab>
-            </Stack>
-          </Stack>
+          <div className={classes.paper} style={{ width: "750px" }}>
+            <ModalImg src="/img/gallery-2.jpg" alt="login" />
+            {renderForm("login")}
+          </div>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }
